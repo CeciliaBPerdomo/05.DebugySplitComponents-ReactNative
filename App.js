@@ -62,7 +62,7 @@ export default function App() {
 
   const deleteTask = () => {
     console.log("Eliminado: " + taskSelected.id)
-    setTasks(tasks.filter(task => task != taskSelected.id))
+    setTasks(tasks.filter(task => task.id != taskSelected.id))
     setModalVisible(!modalVisible)
   }
 
