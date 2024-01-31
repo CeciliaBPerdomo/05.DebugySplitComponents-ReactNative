@@ -21,7 +21,8 @@
 
 ## Developer
 <p align="center">
-   <img src="https://media.licdn.com/dms/image/D4E03AQFwB9dt_POeVA/profile-displayphoto-shrink_800_800/0/1695144416725?e=1712188800&v=beta&t=nGWQ9fzCLwFnUDpTil_NZD4pI38GmVnDMdM9aiuFgxA">
+   <img src="https://media.licdn.com/dms/image/D4E03AQFwB9dt_POeVA/profile-displayphoto-shrink_800_800/0/1695144416725?e=1712188800&v=beta&t=nGWQ9fzCLwFnUDpTil_NZD4pI38GmVnDMdM9aiuFgxA" 
+   width="35%">
 </p>
 
 ##
