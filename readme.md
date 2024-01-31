@@ -10,4 +10,13 @@
 
 ## :hammer:Funcionalidades del proyecto
 
-- `Funcionalidad`: Se trata de una aplicación para celular de una lista de tareas pendientes o realizadas
+- `Funcionalidad`: Se trata de una aplicación para celular realiza con React Native de una lista de tareas pendientes o realizadas.
+
+
+## 🛠️ Abre y ejecuta el proyecto
+- Instalar:     npm i react-native-uuid
+                npm install 
+
+- Inicializar el proyecto:  npm start 
+
+![GitHub Org's stars](https://img.shields.io/github/stars/camilafernanda?style=social)
