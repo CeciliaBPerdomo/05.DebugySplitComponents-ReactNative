@@ -14,13 +14,14 @@
 
 
 ## 🛠️ Abre y ejecuta el proyecto
-- `Instalar`:     npm i react-native-uuid
-                npm install 
+- `Instalar`:     
+- npm i react-native-uuid
+- npm install 
 
 - `Inicializar el proyecto`:  npm start 
 
 ## Developer
-- Realizado por `Cecilia Perdomo`, Enero 2024. 
+- Realizado por `Cecilia Perdomo`, 31 de Enero 2024. 
 
 ##
 ![GitHub Org's stars](https://img.shields.io/github/stars/camilafernanda?style=social)
