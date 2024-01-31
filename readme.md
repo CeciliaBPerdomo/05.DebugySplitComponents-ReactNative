@@ -10,4 +10,4 @@
 
 ## :hammer:Funcionalidades del proyecto
 
-- `Funcionalidad 1`: Se trata de una aplicación para celular de una lista de tareas pendientes o realizadas
+- `Funcionalidad`: Se trata de una aplicación para celular de una lista de tareas pendientes o realizadas
