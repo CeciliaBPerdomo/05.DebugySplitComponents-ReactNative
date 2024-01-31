@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList, Modal } from 'react-native';
 import uuid from 'react-native-uuid' //Generador de ids --> npm i react-native-uuid
 import ModalDeleteTask from './src/components/ModalDeleteTask';
+import AddTask from './src/components/AddTask';
 
 export default function App() {
 
@@ -51,12 +52,13 @@ export default function App() {
   return (
     <View style={styles.container}>
 
-      <View style={styles.inputContainer}>
-        <TextInput value={taskTitle} placeholder='Ingresar titulo tarea' onChangeText={onHandlerTitle} style={styles.input} />
-        <TextInput value={taskDescription} placeholder='Ingresar descripcion tarea' onChangeText={onHandlerDescription} style={styles.input} />
-        <Button color="#3921F5" title='Agregar tarea' onPress={addTask} />
-      </View>
-
+      <AddTask
+        taskTitle={taskTitle}
+        onHandlerTitle={onHandlerTitle}
+        taskDescription={taskDescription}
+        onHandlerDescription={onHandlerDescription}
+        addTask={addTask}
+      />
 
       <View style={styles.tasksContainer}>
         <FlatList
@@ -71,6 +73,7 @@ export default function App() {
             </View>
           )}
         />
+
         <ModalDeleteTask
           modalVisible={modalVisible}
           taskSelected={taskSelected}
@@ -90,25 +93,8 @@ const styles = StyleSheet.create({
     paddingTop: 30
   },
 
-  inputContainer: {
-    backgroundColor: "#872FF5",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-around",
-    paddingBottom: 15
-  },
-
-  input: {
-    width: 250,
-    borderBottomWidth: 2,
-    borderColor: "white",
-    margin: 10,
-    paddingVertical: 5,
-    paddingHorizontal: 10
-  },
 
   tasksContainer: {
-    // alignItems: "center",
     gap: 25,
     padding: 10
   },
