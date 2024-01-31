@@ -8,10 +8,12 @@ const ListTask = ({ tasks, handlerModal }) => {
                 data={tasks}
                 keyExtractor={tasks => tasks.id}
                 renderItem={({ item }) => (
+                    
                     <CardTaskList
                         item={item}
                         handlerModal={handlerModal}
                     />
+                    
                 )}
             />
         </View>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList, Modal } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import uuid from 'react-native-uuid' //Generador de ids --> npm i react-native-uuid
 import ModalDeleteTask from './src/components/ModalDeleteTask';
 import AddTask from './src/components/AddTask';
@@ -83,8 +83,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2E4F6',
     paddingTop: 30
   },
-
-
-
-
 });
