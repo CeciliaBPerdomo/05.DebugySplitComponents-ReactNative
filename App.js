@@ -1,68 +1,62 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList, Modal } from 'react-native';
 import uuid from 'react-native-uuid' //Generador de ids --> npm i react-native-uuid
+import ModalDeleteTask from './src/components/ModalDeleteTask';
 
 export default function App() {
-  const [newTask, setNewTask] = useState({
-    id: "",
-    title: "",
-    description: ""
-  })
+
+  const [taskTitle, setTaskTitle] = useState("")
+  const [taskDescription, setTaskDescription] = useState("")
+  const [taskSelected, setTaskSelected] = useState({})
 
   const [tasks, setTasks] = useState([])
+
   const [modalVisible, setModalVisible] = useState(false)
-  const [idSelected, setIdSelected] = useState(0)
- 
+
   const addTask = () => {
+    const newTask = {
+      id: uuid.v4(),
+      createAt: new Date().toLocaleString(),
+      updateAt: new Date().toLocaleString(),
+      title: taskTitle,
+      description: taskDescription
+    }
+
     setTasks([...tasks, newTask])
-    setNewTask({
-      id: "",
-      title: "",
-      description: ""
-    })
+
+    setTaskTitle("")
+    setTaskDescription("")
   }
 
   const onHandlerTitle = (t) => {
-    const id = uuid.v4()
-    setNewTask({ ...newTask, title: t, id })
+    setTaskTitle(t)
   }
 
   const onHandlerDescription = (t) => {
-    setNewTask({ ...newTask, description: t })
+    setTaskDescription(t)
   }
 
-  const handlerModal = (id) => {
-    setIdSelected(id)
-    setModalVisible(true)
+  const handlerModal = (task) => {
+    setTaskSelected(task)
+    setModalVisible(!modalVisible)
   }
-  
+
   const deleteTask = () => {
-    console.log("Eliminado: " + idSelected)
-    setTasks(tasks.filter(task => task != idSelected))
-    setModalVisible(false)
+    console.log("Eliminado: " + taskSelected.id)
+    setTasks(tasks.filter(task => task != taskSelected.id))
+    setModalVisible(!modalVisible)
   }
-
 
 
   return (
     <View style={styles.container}>
 
       <View style={styles.inputContainer}>
-        <TextInput value={newTask.title} placeholder='Ingresar titulo tarea' onChangeText={onHandlerTitle} style={styles.input} />
-        <TextInput value={newTask.description} placeholder='Ingresar descripcion tarea' onChangeText={onHandlerDescription} style={styles.input} />
+        <TextInput value={taskTitle} placeholder='Ingresar titulo tarea' onChangeText={onHandlerTitle} style={styles.input} />
+        <TextInput value={taskDescription} placeholder='Ingresar descripcion tarea' onChangeText={onHandlerDescription} style={styles.input} />
         <Button color="#3921F5" title='Agregar tarea' onPress={addTask} />
       </View>
 
-      {/* <ScrollView style={styles.tasksContainer}>
-        {tasks.map((item, id) => (
-          <View style={styles.taskCard} key={id}>
-            <Text style={styles.text}>
-              {item.title}
-            </Text>
-            <Button title='DEL' />
-          </View>
-        ))}
-      </ScrollView> */}
 
       <View style={styles.tasksContainer}>
         <FlatList
@@ -73,17 +67,16 @@ export default function App() {
               <Text style={styles.text}>
                 {item.title}
               </Text>
-              <Button title='DEL' onPress={() => handlerModal(item.id)} />
+              <Button title='DEL' onPress={() => handlerModal(item)} />
             </View>
           )}
         />
-        <Modal visible={modalVisible} >
-          <View>
-            <Text>Estas seguro que quieres borrar?</Text>
-            <Button title='si' onPress={deleteTask}/>
-            <Button title='no' onPress={() => setModalVisible(false)} />
-          </View>
-        </Modal>
+        <ModalDeleteTask
+          modalVisible={modalVisible}
+          taskSelected={taskSelected}
+          deleteTask={deleteTask}
+          handlerModal={handlerModal}
+        />
       </View>
 
     </View>
