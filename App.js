@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions, Text } from 'react-native';
+
 import uuid from 'react-native-uuid' //Generador de ids --> npm i react-native-uuid
+
 import ModalDeleteTask from './src/components/ModalDeleteTask';
 import AddTask from './src/components/AddTask';
 import ListTask from './src/components/ListTask';
@@ -15,19 +17,34 @@ export default function App() {
 
   const [modalVisible, setModalVisible] = useState(false)
 
+  // Ancho del dispositivo
+  const screenWidth = Dimensions.get('window').width
+
   const addTask = () => {
     const newTask = {
       id: uuid.v4(),
       createAt: new Date().toLocaleString(),
       updateAt: new Date().toLocaleString(),
       title: taskTitle,
-      description: taskDescription
+      description: taskDescription,
+      completed: false
     }
 
     setTasks([...tasks, newTask])
 
     setTaskTitle("")
     setTaskDescription("")
+  }
+
+
+  // Actualizacion de la tarea pendiente o no
+  const updateTaskCompleted = (id) => {
+    setTasks(tasks.map(task => {
+      if (task.id === id) {
+        return { ...task, ...{ completed: !task.completed } }
+      }
+      return task
+    }))
   }
 
   const onHandlerTitle = (t) => {
@@ -53,6 +70,10 @@ export default function App() {
   return (
     <View style={styles.container}>
 
+      <Text style={styles.encabezado}>
+        Lista de tareas
+      </Text>
+
       <AddTask
         taskTitle={taskTitle}
         onHandlerTitle={onHandlerTitle}
@@ -64,6 +85,8 @@ export default function App() {
       <ListTask
         tasks={tasks}
         handlerModal={handlerModal}
+        screenWidth={screenWidth}
+        updateTaskCompleted={updateTaskCompleted}
       />
 
       <ModalDeleteTask
@@ -83,4 +106,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2E4F6',
     paddingTop: 30
   },
+
+  encabezado: {
+    fontSize: 24,
+    justifyContent: "center", 
+    alignItems: "center",
+    padding: 10, 
+    color: "#872FF5"
+  }
 });

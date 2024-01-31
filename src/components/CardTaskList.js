@@ -1,13 +1,45 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, Switch } from 'react-native'
 import React from 'react'
+import ButtonPrimary from './ButtonPrimary'
 
-const CardTaskList = ({item, handlerModal}) => {
+const CardTaskList = ({ item, handlerModal, screenWidth, updateTaskCompleted }) => {
     return (
-        <View style={styles.taskCard} key={item.id}>
+        <View
+            style={[styles.taskCard, { width: screenWidth - 40 }]}
+            key={item.id}>
+
             <Text style={styles.text}>
-                {item.title}
+                Creación: {item.createAt}
             </Text>
-            <Button title='Borrar' onPress={() => handlerModal(item)} />
+
+            <Text style={styles.text}>
+                Título: {item.title}
+            </Text>
+
+            <Text style={styles.text}>
+                Descripción: {item.description}
+            </Text>
+
+            <Text style={styles.text}>
+                Actualización: {item.updateAt}
+            </Text>
+
+            <View style={styles.completedContainer}>
+                <Switch
+                    value={item.completed}
+                    onValueChange={() => updateTaskCompleted(item.id)}
+                />
+
+                <Text style={styles.completedText}>
+                    {item.completed ? "Tarea pendiente" : "Tarea completada"}
+                </Text>
+            </View>
+
+            <ButtonPrimary
+                title='Borrar tarea'
+                onPress={() => handlerModal(item)}
+            />
+
         </View>
     )
 }
@@ -16,17 +48,30 @@ export default CardTaskList
 
 const styles = StyleSheet.create({
     taskCard: {
-        flexDirection: "row",
         backgroundColor: "#872FF5",
         padding: 20,
-        alignItems: "center",
+        marginHorizontal: 10,
+        alignItems: "flex-start",
         borderRadius: 5,
-        marginVertical: 10
-      },
-    
-      text: {
-        width: "70%",
+        marginVertical: 5,
+        marginHorizontal: 5,
+        gap: 25
+    },
+
+    text: {
+        width: "100%",
         color: "white",
+        fontSize: 18,
+    },
+
+    completedContainer: {
+        flexDirection: "row"
+    }, 
+
+    completedText: {
         fontSize: 16,
-      },
+        color: "white",
+        marginTop: 13,
+        paddingLeft: 7,
+    }
 })

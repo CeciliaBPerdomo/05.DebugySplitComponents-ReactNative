@@ -1,11 +1,35 @@
-import { StyleSheet, Button, View, TextInput } from 'react-native'
+import { StyleSheet, View, TextInput } from 'react-native'
+import ButtonPrimary from './ButtonPrimary'
 
 const AddTask = ({ taskTitle, onHandlerTitle, taskDescription, onHandlerDescription, addTask }) => {
+
     return (
-        <View style={styles.inputContainer}>
-            <TextInput value={taskTitle} placeholder='Ingresar titulo tarea' onChangeText={onHandlerTitle} style={styles.input} />
-            <TextInput value={taskDescription} placeholder='Ingresar descripcion tarea' onChangeText={onHandlerDescription} style={styles.input} />
-            <Button color="#3921F5" title='Agregar tarea' onPress={addTask} />
+        <View style={styles.container}>
+
+            <TextInput
+                value={taskTitle}
+                placeholder='Ingresar título tarea'
+                placeholderTextColor="white"
+                maxLength={25}
+                onChangeText={onHandlerTitle}
+                style={styles.input}
+            />
+
+            <TextInput
+                value={taskDescription}
+                placeholder='Ingresar descripción tarea'
+                placeholderTextColor="white"
+                multiline
+                numberOfLines={4}
+                maxLength={100}
+                onChangeText={onHandlerDescription}
+                style={styles.input} />
+
+            <ButtonPrimary 
+                title={"Agregar tarea"}
+                onPress={addTask}
+            />
+
         </View>
     )
 }
@@ -13,21 +37,26 @@ const AddTask = ({ taskTitle, onHandlerTitle, taskDescription, onHandlerDescript
 export default AddTask
 
 const styles = StyleSheet.create({
-    inputContainer: {
+    container: {
         backgroundColor: "#872FF5",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-around",
-        paddingBottom: 15
+        padding: 10
     },
 
     input: {
-        width: 250,
-        borderBottomWidth: 2,
+        width: "100%",
+        borderWidth: 2,
         borderColor: "white",
-        margin: 10,
+        marginHorizontal: 10,
+        marginVertical: 5,
         paddingVertical: 5,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        color: "white",
+        fontSize: 16,
+        borderRadius: 10,
+        textAlignVertical: "top"
     },
 
 
