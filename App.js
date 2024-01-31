@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList, Modal 
 import uuid from 'react-native-uuid' //Generador de ids --> npm i react-native-uuid
 import ModalDeleteTask from './src/components/ModalDeleteTask';
 import AddTask from './src/components/AddTask';
+import ListTask from './src/components/ListTask';
 
 export default function App() {
 
@@ -60,27 +61,17 @@ export default function App() {
         addTask={addTask}
       />
 
-      <View style={styles.tasksContainer}>
-        <FlatList
-          data={tasks}
-          keyExtractor={tasks => tasks.id}
-          renderItem={({ item }) => (
-            <View style={styles.taskCard} key={item.id}>
-              <Text style={styles.text}>
-                {item.title}
-              </Text>
-              <Button title='DEL' onPress={() => handlerModal(item)} />
-            </View>
-          )}
-        />
+      <ListTask
+        tasks={tasks}
+        handlerModal={handlerModal}
+      />
 
-        <ModalDeleteTask
-          modalVisible={modalVisible}
-          taskSelected={taskSelected}
-          deleteTask={deleteTask}
-          handlerModal={handlerModal}
-        />
-      </View>
+      <ModalDeleteTask
+        modalVisible={modalVisible}
+        taskSelected={taskSelected}
+        deleteTask={deleteTask}
+        handlerModal={handlerModal}
+      />
 
     </View>
   );
@@ -94,24 +85,6 @@ const styles = StyleSheet.create({
   },
 
 
-  tasksContainer: {
-    gap: 25,
-    padding: 10
-  },
 
-  taskCard: {
-    flexDirection: "row",
-    backgroundColor: "#872FF5",
-    padding: 20,
-    alignItems: "center",
-    borderRadius: 5,
-    marginVertical: 10
-  },
-
-  text: {
-    width: "70%",
-    color: "white",
-    fontSize: 16,
-  },
 
 });
